@@ -90,8 +90,7 @@ def get_complete_solution (index, a_row, b_matrix_element) :
     return (b_matrix_element - aux_sum) / a_row[index]
 
 
-def print_solutions (list_solutions, numb_excercise) : 
-    print("Las soluciones del ejercicio", numb_excercise, "son: \n")
-    for solution in list_solutions : 
-        solution.print_solution()
+def print_solutions (solutions, numb_excercise) : 
+    print("Las soluciones del ejercicio", numb_excercise, "son: \n", solutions)
+    
 

@@ -1,4 +1,5 @@
 ''' Eliminación Gaussiana con pivoteo parcial '''
+from xml.dom.minidom import Element
 from    numpy           import * # Para manejar matrices 
 from    utils           import *
 from    constants       import *
@@ -29,7 +30,7 @@ def gauss_elimination (A, B, exercise_number = "NA") :
 
     # Realizamos eliminación hacia adelante
     for row_index in range(n_A - 1) :
-        print("*************************************")
+        # print("*************************************")
         (norm_factor_index, norm_factor)    = get_non_zero_element(A[row_index, :])
         
         if (norm_factor_index == -1) : continue
@@ -38,10 +39,10 @@ def gauss_elimination (A, B, exercise_number = "NA") :
 
         A[row_index, :]                     = normalize_row(norm_factor, A[row_index, :])
         B[row_index, :]                     = normalize_row(norm_factor, B[row_index, :])
-        print("A matrix: \n", A)
+        # print("A matrix: \n", A)
         # print("pivote_index: ", row_index)
 
-        print("*************************************\n")
+        # print("*************************************\n")
 
         for nxt_row_index in range(row_index + 1, n_A) :
           
@@ -57,7 +58,7 @@ def gauss_elimination (A, B, exercise_number = "NA") :
             index   = row_index
 
             if (factor == 0) : 
-                print("CONTINUE: ")
+                # print("CONTINUE: ")
                 continue
 
             # print("nxt_row_index: ", nxt_row_index)
@@ -78,85 +79,94 @@ def gauss_elimination (A, B, exercise_number = "NA") :
                 A = change_row(nxt_row_index, nxt_row_index + 1, A)
                 B = change_row(nxt_row_index, nxt_row_index + 1, B)
 
-            print("*************************************\n")
+            # print("*************************************\n")
 
         
-        print(A, "\n")
+        # print(A, "\n")
+    # print("*************************************")
 
-        # (zero_row_indices, non_zero_row_indices) = get_rows_zeros_and_non_zero_indices(A)
-
-        # if (len(zero_row_indices) > 0) :
-        #     print(f"{bcolors.HEADER}THERE ARE ROWS WITH ZEROS!{bcolors.ENDC}")
-        #     (A, B) = move_rows_zeros(zero_row_indices, non_zero_row_indices, A, B)
-    print("*************************************")
     (_, norm_factor )   = get_non_zero_element(A[n_A - 1, :])
-
+    
     if (norm_factor != 0) :
         A[n_A - 1, :]       = normalize_row(norm_factor, A[n_A - 1, :])
 
+
     # Obtenemos el rango de la matriz
-    range_A = get_matrix_range(A)
-    are_there_many_solutions = range_A < m_A
-
-    if (are_there_many_solutions) : 
-        print(f"{bcolors.HEADER}Atencion: El sistema de ecuaciones tiene infinitas soluciones.{bcolors.ENDC}")
-
+    range_A                     = get_matrix_range(A)
+    are_there_many_solutions    = (range_A < m_A)
 
     print("La matriz diagonalizada es:\n", A, "\n")
     print("La matriz B es:\n", B, "\n")
 
     # Soluciones de la ecuacion
-    list_solutions = []
-            
-    return list_solutions
+    x = zeros(m_A, float)
+
+    if (range_A == m_A) :
+        x[m_A - 1] = B[m_A-1] / A[m_A - 1, m_A - 1]
+        for i in range(m_A - 2, -1, -1):
+            sum_ax = 0
+  
+            for j in range(i + 1, m_A):
+                sum_ax += A[i, j] * x[j]
+        
+            x[i] = (B[i] - sum_ax) / A[i,i]
+
+        return x
+
+    elif (are_there_many_solutions) :
+        print(f"{bcolors.HEADER}Atencion: El sistema de ecuaciones tiene infinitas soluciones.{bcolors.ENDC}")
+        return x
     
 
 if __name__ == '__main__':
-    print("******************** START ********************")
+    print(f"{bcolors.OKGREEN}******************** START ********************{bcolors.ENDC}")
+    print("\n")
     
+
+    print(f"{bcolors.FAIL}----------------------------------------{bcolors.ENDC}")
     solutions_15 = gauss_elimination(m_a_15, m_b_15, 15)
     print_solutions(solutions_15, 15)
 
     print("\n\n")
 
-    print("----------------------------------------")
+    print(f"{bcolors.FAIL}----------------------------------------{bcolors.ENDC}")
     solutions_16 = gauss_elimination(m_a_16, m_b_16, 16)
     print_solutions(solutions_16, 16)
 
     print("\n\n")
 
-    print("----------------------------------------")
+    print(f"{bcolors.FAIL}----------------------------------------{bcolors.ENDC}")
     solutions_17 = gauss_elimination(m_a_17, m_b_17, 17)
     print_solutions(solutions_17, 17)
 
     print("\n\n")
 
-    print("----------------------------------------")
+    print(f"{bcolors.FAIL}----------------------------------------{bcolors.ENDC}")
     solutions_18 = gauss_elimination(m_a_18, m_b_18, 18)
     print_solutions(solutions_18, 18)
 
     print("\n\n")
 
-    print("----------------------------------------")
+    print(f"{bcolors.FAIL}----------------------------------------{bcolors.ENDC}")
     solutions_19 = gauss_elimination(m_a_19, m_b_19, 19)
     print_solutions(solutions_19, 19)
 
     print("\n\n")
 
-    print("----------------------------------------")
+    print(f"{bcolors.FAIL}----------------------------------------{bcolors.ENDC}")
     solutions_20 = gauss_elimination(m_a_20, m_b_20, 20)
     print_solutions(solutions_20, 20)
 
     print("\n\n")
 
-    print("----------------------------------------")
+    print(f"{bcolors.FAIL}----------------------------------------{bcolors.ENDC}")
     solutions_21 = gauss_elimination(m_a_21, m_b_21, 21)
     print_solutions(solutions_21, 21)
 
     print("\n\n")
-    
-    print("----------------------------------------")
+
+    print(f"{bcolors.FAIL}----------------------------------------{bcolors.ENDC}")
     solutions_22 = gauss_elimination(m_a_22, m_b_22, 22)
     print_solutions(solutions_22, 22)
-
-    print("******************** END ********************")
+    
+    print(f"{bcolors.OKGREEN}******************** END ********************{bcolors.ENDC}")

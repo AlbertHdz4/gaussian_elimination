@@ -1,9 +1,8 @@
+""" Author: Alberto Hernández López """
+""" Constantes que se utilizan en el programa principal """
 import sys as so
 import numpy as np
 
-WELCOME_MSG = "\n---- Programa que resuelve un sistema de ecuaciones lineales mediante el metodo de Eliminacion Gaussiana ----\n"
-REINPUT     = "Ingresa de nuevo la dimension de la matriz"
-DIMEN_ERROR = "El tamanio de la matriz es erroneo"
 
 # Matrices de los problemas
 m_a_15 = np.array([
