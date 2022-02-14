@@ -52,9 +52,7 @@ def move_rows_zeros (zero_indices, non_zero_indices, matrix_a, matrix_b) :
 
 # Normaliza la fila de la matriz
 def normalize_row (factor, row) :
-    for i in range(len(row)) :
-        row[i] = float(row[i] / factor)
-    return row
+    return row / factor
 
 
 # Obtiene el elemento no zero de la fila
