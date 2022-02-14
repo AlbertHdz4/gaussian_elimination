@@ -48,7 +48,7 @@ def gauss_elimination (A, B, exercise_number = "NA") :
 
         for nxt_row_index in range(row_index + 1, n_A) :
 
-            # print("FACTOR: A[", nxt_row_index, ",", row_index, "]")
+            print("FACTOR: A[", nxt_row_index, ",", row_index, "]")
             factor  = A[nxt_row_index, row_index]
             index   = row_index
             print("FACTOR: ", factor)
@@ -71,7 +71,7 @@ def gauss_elimination (A, B, exercise_number = "NA") :
 
         (norm_factor_index, _) = get_non_zero_element(A[nxt_row_index, :])
 
-        if (norm_factor_index == -1 and nxt_row_index + 1 > n_A) :
+        if (nxt_row_index + 1 > n_A) :
             try :
                 (norm_factor_index, _) = get_non_zero_element(A[nxt_row_index, :])
                 (nxt_norm_factor_index, _) = get_non_zero_element(A[nxt_row_index + 1, :])
@@ -86,11 +86,14 @@ def gauss_elimination (A, B, exercise_number = "NA") :
         print("A Matrix\n", A, "\n")
         print("B Matrix\n", B, "\n")
     print("*************************************")
+
+    
     (_, norm_factor ) = get_non_zero_element(A[n_A - 1, :])
     
     if (norm_factor != 0) :
         A[n_A - 1, :] = normalize_row(norm_factor, A[n_A - 1, :])
 
+    (A, B) = check_final_rows(A, B)
 
     # Obtenemos el rango de la matriz
     range_A                     = get_matrix_range(A)
@@ -148,11 +151,11 @@ if __name__ == '__main__':
 
     # print("\n\n")
 
-    print(f"{bcolors.FAIL}----------------------------------------{bcolors.ENDC}")
-    solutions_19 = gauss_elimination(m_a_19, m_b_19, 19)
-    print_solutions(solutions_19, 19)
+    # print(f"{bcolors.FAIL}----------------------------------------{bcolors.ENDC}")
+    # solutions_19 = gauss_elimination(m_a_19, m_b_19, 19)
+    # print_solutions(solutions_19, 19)
 
-    print("\n\n")
+    # print("\n\n")
 
     # print(f"{bcolors.FAIL}----------------------------------------{bcolors.ENDC}")
     # solutions_20 = gauss_elimination(m_a_20, m_b_20, 20)
@@ -166,8 +169,8 @@ if __name__ == '__main__':
 
     # print("\n\n")
 
-    # print(f"{bcolors.FAIL}----------------------------------------{bcolors.ENDC}")
-    # solutions_22 = gauss_elimination(m_a_22, m_b_22, 22)
-    # print_solutions(solutions_22, 22)
+    print(f"{bcolors.FAIL}----------------------------------------{bcolors.ENDC}")
+    solutions_22 = gauss_elimination(m_a_22, m_b_22, 22)
+    print_solutions(solutions_22, 22)
     
     print(f"{bcolors.OKGREEN}******************** END ********************{bcolors.ENDC}")

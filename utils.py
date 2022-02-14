@@ -79,6 +79,30 @@ def get_matrix_range (matrix) :
     return range_matrix
 
 
+def check_final_rows (matrix_a, matrix_b) : 
+    print("CHECK_FINAL_ROWS: ")
+    (n, m) = matrix_a.shape
+    (index_n, value_a_n)     = get_non_zero_element(matrix_a[n - 1, :])
+    print("index_n: ", index_n)
+    print("value_a_n: ", value_a_n)
+
+    (index_n_1, value_a_n_1) = get_non_zero_element(matrix_a[n - 2, :])
+    print("index_n_1: ", index_n_1)
+    print("value_a_n_1: ", value_a_n_1)
+
+    value_b_n   = matrix_b[n - 1]
+    value_b_n_1 = matrix_b[n - 2]
+    print("value_b_n: ", value_b_n)
+    print("value_b_n_1: ", value_b_n_1)
+
+    if (index_n == index_n_1 and value_a_n == value_a_n_1 and value_b_n == value_b_n_1) :
+        matrix_a[n - 1] = matrix_a[n - 1] - matrix_a[n - 2] * value_a_n_1
+        matrix_b[n - 1] = matrix_b[n - 1] - matrix_b[n - 2] * value_a_n_1
+
+    return (matrix_a, matrix_b)
+
+
+
 def get_complete_solution (index, a_row, b_matrix_element) :
     aux_sum = 0
     # print("LEN_A_ROW: ", len(a_row))
