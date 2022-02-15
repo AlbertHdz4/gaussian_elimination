@@ -1,6 +1,9 @@
 import  sys         as so
+import  math        as math
 import  numpy       as np
-from    numpy       import *
+
+from    numpy           import *
+from    model.colors    import *
 
 
 # Regresa el indice de las filas y la 
@@ -106,7 +109,7 @@ def check_final_rows (matrix_a, matrix_b) :
 
     value_b_n   = matrix_b[n - 1]
     value_b_n_1 = matrix_b[n - 2]
-    
+
     if (index_n == index_n_1 and value_a_n == value_a_n_1 and value_b_n == value_b_n_1) :
         matrix_a[n - 1] = matrix_a[n - 1] - matrix_a[n - 2] * value_a_n_1
         matrix_b[n - 1] = matrix_b[n - 1] - matrix_b[n - 2] * value_a_n_1
@@ -126,10 +129,6 @@ def get_most_left_column (matrix_a) :
     return (None, None)
 
 
-def multiply_row_by_scalar (number, row) :
-    return row * number
-
-
 def get_complete_solution (index, a_row, b_matrix_element) :
     aux_sum = 0
     # print("LEN_A_ROW: ", len(a_row))
@@ -141,5 +140,27 @@ def get_complete_solution (index, a_row, b_matrix_element) :
 
 def print_solutions (solutions, numb_excercise) : 
     print("Las soluciones del ejercicio", numb_excercise, "son: \n", solutions)
-    
+
+
+def truncate(number, digits) -> float:
+    stepper = 10.0 ** digits
+    return math.trunc(stepper * number) / stepper
+
+
+def print_infinite_solutions (matrix_a, matrix_b) :
+    (n, m) = matrix_a.shape
+    solutions   = []
+    solution    = "\n"
+    for i in range(n) : 
+        solution += "\t"
+        for j in range(m) :
+            solution += str(truncate(matrix_a[i, j], 2)) + "*X" + str(j)
+            if j + 1 != m :
+                solution += " + "
+        
+        solution += " = " + str(matrix_b[i]).lstrip('[').rstrip(']')
+        print(f"{bcolors.OKGREEN}", solution)
+
+        solution = ""        
+    print("\n")
 

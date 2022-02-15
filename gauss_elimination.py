@@ -133,6 +133,7 @@ def gauss_elimination (A, B, exercise_number = "NA") :
 
     elif (are_there_many_solutions) :
         print(f"{bcolors.HEADER}Atencion: El sistema de ecuaciones tiene infinitas soluciones.{bcolors.ENDC}")
+        print_infinite_solutions(A, B)
         
 
 if __name__ == '__main__':
@@ -142,55 +143,48 @@ if __name__ == '__main__':
 
     # print(f"{bcolors.FAIL}----------------------------------------{bcolors.ENDC}")
     # gauss_elimination(m_a_15, m_b_15, 15)
-    # print_solutions(solutions_15, 15)
     # print(f"{bcolors.FAIL}----------------------------------------{bcolors.ENDC}")
 
     # print("\n\n")
 
     # print(f"{bcolors.FAIL}----------------------------------------{bcolors.ENDC}")
     # gauss_elimination(m_a_16, m_b_16, 16)
-    # print_solutions(solutions_16, 16)
     # print(f"{bcolors.FAIL}----------------------------------------{bcolors.ENDC}")
 
     # print("\n\n")
 
-    # print(f"{bcolors.FAIL}----------------------------------------{bcolors.ENDC}")
-    # gauss_elimination(m_a_17, m_b_17, 17)
-    # print_solutions(solutions_17, 17)
-    # print(f"{bcolors.FAIL}----------------------------------------{bcolors.ENDC}")
+    print(f"{bcolors.FAIL}----------------------------------------{bcolors.ENDC}")
+    gauss_elimination(m_a_17, m_b_17, 17)
+    print(f"{bcolors.FAIL}----------------------------------------{bcolors.ENDC}")
 
-    # print("\n\n")
+    print("\n\n")
 
     # print(f"{bcolors.FAIL}----------------------------------------{bcolors.ENDC}")
     # gauss_elimination(m_a_18, m_b_18, 18)
-    # print_solutions(solutions_18, 18)
     # print(f"{bcolors.FAIL}----------------------------------------{bcolors.ENDC}")
 
     # print("\n\n")
 
     # print(f"{bcolors.FAIL}----------------------------------------{bcolors.ENDC}")
     # gauss_elimination(m_a_19, m_b_19, 19)
-    # print_solutions(solutions_19, 19)
     # print(f"{bcolors.FAIL}----------------------------------------{bcolors.ENDC}")
 
     # print("\n\n")
 
     # print(f"{bcolors.FAIL}----------------------------------------{bcolors.ENDC}")
     # gauss_elimination(m_a_20, m_b_20, 20)
-    # print_solutions(solutions_20, 20)
     # print(f"{bcolors.FAIL}----------------------------------------{bcolors.ENDC}")
 
     # print("\n\n")
 
     # print(f"{bcolors.FAIL}----------------------------------------{bcolors.ENDC}")
     # gauss_elimination(m_a_21, m_b_21, 21)
-    # print_solutions(solutions_21, 21)
     # print(f"{bcolors.FAIL}----------------------------------------{bcolors.ENDC}")
 
     # print("\n\n")
 
-    print(f"{bcolors.FAIL}----------------------------------------{bcolors.ENDC}")
-    gauss_elimination(m_a_22, m_b_22, 22)
-    print(f"{bcolors.FAIL}----------------------------------------{bcolors.ENDC}")
+    # print(f"{bcolors.FAIL}----------------------------------------{bcolors.ENDC}")
+    # gauss_elimination(m_a_22, m_b_22, 22)
+    # print(f"{bcolors.FAIL}----------------------------------------{bcolors.ENDC}")
     
     print(f"{bcolors.OKGREEN}******************** END ********************{bcolors.ENDC}")
