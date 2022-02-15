@@ -1,3 +1,4 @@
+""" Author: Alberto Hernández López """
 ''' Eliminación Gaussiana con pivoteo parcial '''
 from    numpy           import * # Para manejar matrices 
 from    utils           import *
@@ -13,7 +14,6 @@ def gauss_elimination (A, B, exercise_number = "NA") :
 
     # Obtenemos las dimensiones de A
     (n_A, m_A)          = A.shape
-    is_a_squared_matrix = (n_A == m_A)
     most_left_column    = A[:, 0]
 
     print("Dimensiones de A: n = ", n_A, " m = ", m_A, "\n")
@@ -32,76 +32,39 @@ def gauss_elimination (A, B, exercise_number = "NA") :
 
     # Realizamos eliminación hacia adelante
     for row_index in range(n_A - 1) :
-        # print("*************************************")
-
         (norm_factor_index, norm_factor) = get_non_zero_element(A[row_index, :])
         
         if (norm_factor_index == -1) : continue
-        # print("pivote_norm_factor: ", norm_factor)
-        # print("pivote_norm_factor_index: ", norm_factor_index)
 
         A[row_index, :] = normalize_row(norm_factor, A[row_index, :])
         B[row_index, :] = normalize_row(norm_factor, B[row_index, :])
-        
-        # print("A matrix: \n", A)
-        # print("row_index + 1: \n", row_index + 1, " n_A: ", n_A)
-
-        # if (row_index + 1 < n_A) :
-        #     try: 
-        #         (most_left_column_coordinate, column) = get_most_left_column(A[row_index + 1 : n_A, 0: m_A])
-        #         print("most_left_column_index", most_left_column_coordinate[0],  most_left_column_coordinate[1])
-        #         print("most_left_column_index", column)
-        #     except TypeError :
-        #         print("end of the matrix")
-        # print("pivote_index: ", row_index)
-
-        # print("*************************************\n")
 
         for nxt_row_index in range(row_index + 1, n_A) :
-
-            # print("FACTOR: A[", nxt_row_index, ",", row_index, "]")
             factor  = A[nxt_row_index, row_index]
             index   = row_index
-            # print("FACTOR: ", factor)
 
             if (factor == 0) : continue
 
-            # print("nxt_row_index: ", nxt_row_index)
-            # print("FACTOR_TO_DELETE: A[", nxt_row_index, ",", row_index, "]", factor)
-
             for column_index in range(index, m_A) :
-                # print("MATRIX COORDINATE: ", "(", nxt_row_index, ",", column_index, ")") 
-                # print("A[", nxt_row_index, ",", column_index, "] =", A[nxt_row_index, column_index], "-", "(", A[row_index, column_index], "*", factor,")")
-                A[nxt_row_index, column_index] = A[nxt_row_index, column_index] - (A[row_index, column_index] * factor) # (A[index, column_index] * factor)
-
-            # print(A)
+                A[nxt_row_index, column_index] = A[nxt_row_index, column_index] - (A[row_index, column_index] * factor)
 
             # Realizamos las operaciones en B
-            print("B[", nxt_row_index, "] = B[", nxt_row_index, "]", " - B[", row_index, "] *", factor)
-            print("B[", nxt_row_index, "] = ", B[nxt_row_index], " - ", B[row_index], "*", factor)
-            print("B[", nxt_row_index, "] = ", B[nxt_row_index] - B[row_index] * factor)
-            print("\n")
             B[nxt_row_index] = B[nxt_row_index] - B[row_index] * factor
-            # print("*************************************\n")
 
+        # Realizamos intercambios de filas, en caso de ser una fila de zeros
         (norm_factor_index, _) = get_non_zero_element(A[nxt_row_index, :])
 
         if (nxt_row_index + 1 > n_A) :
-            (norm_factor_index, _) = get_non_zero_element(A[nxt_row_index, :])
-            (nxt_norm_factor_index, _) = get_non_zero_element(A[nxt_row_index + 1, :])
+            (norm_factor_index, _)      = get_non_zero_element(A[nxt_row_index, :])
+            (nxt_norm_factor_index, _)  = get_non_zero_element(A[nxt_row_index + 1, :])
 
             if (norm_factor_index > nxt_norm_factor_index) : 
                 A = change_row(nxt_row_index, nxt_row_index + 1, A)
                 B = change_row(nxt_row_index, nxt_row_index + 1, B)
-                # print("ROWS_CHANGED: ")
-        
-        print("A Matrix\n", A, "\n")
-        print("B Matrix\n", B, "\n")
-    print("*************************************")
 
     
+    # Realizamos la normalización de la última fila de la matriz
     (_, norm_factor ) = get_non_zero_element(A[n_A - 1, :])
-    
     if (norm_factor != 0) :
         A[n_A - 1, :] = normalize_row(norm_factor, A[n_A - 1, :])
         B[n_A - 1]    = normalize_row(norm_factor, B[n_A - 1])
@@ -115,9 +78,8 @@ def gauss_elimination (A, B, exercise_number = "NA") :
     print("La matriz diagonalizada es:\n", A, "\n")
     print("La matriz B es:\n", B, "\n")
 
-    # Soluciones de la ecuacion
+    # Soluciones de la ecuacion, imprimimos las soluciones
     x = zeros(m_A, float)
-
     if (range_A == m_A) :
         x[m_A - 1] = B[m_A-1] / A[m_A - 1, m_A - 1]
         for i in range(m_A - 2, -1, -1):
@@ -136,11 +98,11 @@ def gauss_elimination (A, B, exercise_number = "NA") :
         print_infinite_solutions(A, B)
         
 
+# Contiene las matrices a resolver de la parte 1 de la tarea
 if __name__ == '__main__':
     print(f"{bcolors.OKGREEN}******************** START ********************{bcolors.ENDC}")
     print("\n")
     
-
     print(f"{bcolors.FAIL}----------------------------------------{bcolors.ENDC}")
     gauss_elimination(m_a_15, m_b_15, 15)
     print(f"{bcolors.FAIL}----------------------------------------{bcolors.ENDC}")

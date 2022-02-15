@@ -1,7 +1,7 @@
 """ Author: Alberto Hernández López """
 """ Constantes que se utilizan en el programa principal """
-import sys as so
-import numpy as np
+import sys      as so
+import numpy    as np
 
 
 # Matrices de los problemas

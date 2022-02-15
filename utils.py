@@ -1,3 +1,5 @@
+""" Author: Alberto Hernández López """
+""" Utilidades que el programa principal necesita """
 import  sys         as so
 import  math        as math
 import  numpy       as np
@@ -52,14 +54,11 @@ def get_rows_zeros_and_non_zero_indices (matrix) :
     return (zero_indices, non_zero_indices)
 
 
+# Mueve las filas llenas de ceros
 def move_rows_zeros (zero_indices, non_zero_indices, matrix_a, matrix_b) :
     aux_i = len(non_zero_indices) - 1
 
-    for index in zero_indices : 
-        # print("index: ", index)
-        # print("matrix_a[", index, ":]: ", matrix_a[index, :])
-        # print("aux_i: matrix_a[", non_zero_indices[aux_i], ":]: ", matrix_a[non_zero_indices[aux_i], :])
-        
+    for index in zero_indices :         
         aux_row_a = matrix_a[index, :]
         matrix_a[index, :] = matrix_a[non_zero_indices[aux_i], :]
         matrix_a[non_zero_indices[aux_i], :] = aux_row_a
@@ -101,6 +100,7 @@ def get_matrix_range (matrix) :
     return range_matrix
 
 
+# Realiza una eliminacion final, en caso de necesitarla, de las ultimas dos filas
 def check_final_rows (matrix_a, matrix_b) : 
     (n, m) = matrix_a.shape
 
@@ -117,6 +117,11 @@ def check_final_rows (matrix_a, matrix_b) :
     return (matrix_a, matrix_b)
 
 
+# Obtiene la columna que no tiene zeros.
+# return 
+#   (i, j) -> coordenadas del valor que va a pivotear
+#   value  -> el valor para pivotear
+#   column -> columna para pivotear
 def get_most_left_column (matrix_a) : 
     (n, m) = matrix_a.shape
     for i in range(m - 1) :
@@ -129,24 +134,18 @@ def get_most_left_column (matrix_a) :
     return (None, None)
 
 
-def get_complete_solution (index, a_row, b_matrix_element) :
-    aux_sum = 0
-    # print("LEN_A_ROW: ", len(a_row))
-    for i in range(index + 1, len(a_row)) :
-        # print("a_row: ", a_row[i])
-        aux_sum += a_row[i]
-    return (b_matrix_element - aux_sum) / a_row[index]
-
-
+# Imprime las soluciones
 def print_solutions (solutions, numb_excercise) : 
     print("Las soluciones del ejercicio", numb_excercise, "son: \n", solutions)
 
 
+# Trunca un flotante a n digitos decimales
 def truncate(number, digits) -> float:
     stepper = 10.0 ** digits
     return math.trunc(stepper * number) / stepper
 
 
+# Imprime las ecuaciones que tienen soluciones infinitas
 def print_infinite_solutions (matrix_a, matrix_b) :
     print("\n")
     (n, m) = matrix_a.shape
