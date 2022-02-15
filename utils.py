@@ -2,6 +2,25 @@ import  sys         as so
 import  numpy       as np
 from    numpy       import *
 
+
+# Regresa el indice de las filas y la 
+# cantidad de zeros que contiene
+# return idx_and_zeros -> tupla con indice y num de zeros
+def how_many_zeros_you_have (matrix) :
+    idx_and_zeros = []
+    num_zeros       = 0
+    (n, m) = matrix.shape
+    for i in range(n - 1) : 
+        column = matrix[i]
+        for j in range(m - 1) : 
+            element = column[j]
+            if (fabs(element) < 1.0e-12) : 
+                num_zeros += 1
+        idx_and_zeros.append((i, num_zeros))
+
+    return idx_and_zeros
+
+
 # Revisa si el valor es cero
 def is_a_zero (number) :
     return fabs(number) < 1.0e-12
@@ -34,9 +53,9 @@ def move_rows_zeros (zero_indices, non_zero_indices, matrix_a, matrix_b) :
     aux_i = len(non_zero_indices) - 1
 
     for index in zero_indices : 
-        print("index: ", index)
-        print("matrix_a[", index, ":]: ", matrix_a[index, :])
-        print("aux_i: matrix_a[", non_zero_indices[aux_i], ":]: ", matrix_a[non_zero_indices[aux_i], :])
+        # print("index: ", index)
+        # print("matrix_a[", index, ":]: ", matrix_a[index, :])
+        # print("aux_i: matrix_a[", non_zero_indices[aux_i], ":]: ", matrix_a[non_zero_indices[aux_i], :])
         
         aux_row_a = matrix_a[index, :]
         matrix_a[index, :] = matrix_a[non_zero_indices[aux_i], :]
@@ -80,27 +99,35 @@ def get_matrix_range (matrix) :
 
 
 def check_final_rows (matrix_a, matrix_b) : 
-    print("CHECK_FINAL_ROWS: ")
     (n, m) = matrix_a.shape
-    (index_n, value_a_n)     = get_non_zero_element(matrix_a[n - 1, :])
-    print("index_n: ", index_n)
-    print("value_a_n: ", value_a_n)
 
+    (index_n, value_a_n)     = get_non_zero_element(matrix_a[n - 1, :])
     (index_n_1, value_a_n_1) = get_non_zero_element(matrix_a[n - 2, :])
-    print("index_n_1: ", index_n_1)
-    print("value_a_n_1: ", value_a_n_1)
 
     value_b_n   = matrix_b[n - 1]
     value_b_n_1 = matrix_b[n - 2]
-    print("value_b_n: ", value_b_n)
-    print("value_b_n_1: ", value_b_n_1)
-
+    
     if (index_n == index_n_1 and value_a_n == value_a_n_1 and value_b_n == value_b_n_1) :
         matrix_a[n - 1] = matrix_a[n - 1] - matrix_a[n - 2] * value_a_n_1
         matrix_b[n - 1] = matrix_b[n - 1] - matrix_b[n - 2] * value_a_n_1
 
     return (matrix_a, matrix_b)
 
+
+def get_most_left_column (matrix_a) : 
+    (n, m) = matrix_a.shape
+    for i in range(m - 1) :
+        column = matrix_a[:, i]
+        for j in range(n) :
+            value = column[j]
+            if (not is_a_zero(value)) : 
+                return ((j, i), value, column)
+    
+    return (None, None)
+
+
+def multiply_row_by_scalar (number, row) :
+    return row * number
 
 
 def get_complete_solution (index, a_row, b_matrix_element) :
