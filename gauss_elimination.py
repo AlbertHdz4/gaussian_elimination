@@ -36,6 +36,7 @@ def gauss_elimination (A, B, exercise_number = "NA") :
         
         if (norm_factor_index == -1) : continue
 
+        # Normalizamos la fila - pivote
         A[row_index, :] = normalize_row(norm_factor, A[row_index, :])
         B[row_index, :] = normalize_row(norm_factor, B[row_index, :])
 
@@ -45,6 +46,7 @@ def gauss_elimination (A, B, exercise_number = "NA") :
 
             if (factor == 0) : continue
 
+            # Realizamos la eliminación de la fila
             for column_index in range(index, m_A) :
                 A[nxt_row_index, column_index] = A[nxt_row_index, column_index] - (A[row_index, column_index] * factor)
 
@@ -93,7 +95,7 @@ def gauss_elimination (A, B, exercise_number = "NA") :
         print_solutions(x, exercise_number)
 
 
-    elif (are_there_many_solutions) :
+    elif (are_there_many_solutions) : # Imprimimos las soluciones infinitas
         print(f"{bcolors.HEADER}Atencion: El sistema de ecuaciones tiene infinitas soluciones.{bcolors.ENDC}")
         print_infinite_solutions(A, B)
         
