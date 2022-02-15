@@ -141,11 +141,11 @@ if __name__ == '__main__':
     print("\n")
     
 
-    # print(f"{bcolors.FAIL}----------------------------------------{bcolors.ENDC}")
-    # gauss_elimination(m_a_15, m_b_15, 15)
-    # print(f"{bcolors.FAIL}----------------------------------------{bcolors.ENDC}")
+    print(f"{bcolors.FAIL}----------------------------------------{bcolors.ENDC}")
+    gauss_elimination(m_a_15, m_b_15, 15)
+    print(f"{bcolors.FAIL}----------------------------------------{bcolors.ENDC}")
 
-    # print("\n\n")
+    print("\n\n")
 
     # print(f"{bcolors.FAIL}----------------------------------------{bcolors.ENDC}")
     # gauss_elimination(m_a_16, m_b_16, 16)
@@ -153,11 +153,11 @@ if __name__ == '__main__':
 
     # print("\n\n")
 
-    print(f"{bcolors.FAIL}----------------------------------------{bcolors.ENDC}")
-    gauss_elimination(m_a_17, m_b_17, 17)
-    print(f"{bcolors.FAIL}----------------------------------------{bcolors.ENDC}")
+    # print(f"{bcolors.FAIL}----------------------------------------{bcolors.ENDC}")
+    # gauss_elimination(m_a_17, m_b_17, 17)
+    # print(f"{bcolors.FAIL}----------------------------------------{bcolors.ENDC}")
 
-    print("\n\n")
+    # print("\n\n")
 
     # print(f"{bcolors.FAIL}----------------------------------------{bcolors.ENDC}")
     # gauss_elimination(m_a_18, m_b_18, 18)

@@ -148,17 +148,26 @@ def truncate(number, digits) -> float:
 
 
 def print_infinite_solutions (matrix_a, matrix_b) :
+    print("\n")
     (n, m) = matrix_a.shape
     solutions   = []
-    solution    = "\n"
-    for i in range(n) : 
-        solution += "\t"
+    solution    = ""
+    for i in range(n) :
         for j in range(m) :
-            solution += str(truncate(matrix_a[i, j], 2)) + "*X" + str(j)
-            if j + 1 != m :
-                solution += " + "
-        
-        solution += " = " + str(matrix_b[i]).lstrip('[').rstrip(']')
+            if (not is_a_zero(matrix_a[i, j])) :
+                value = matrix_a[i, j]
+                if (value == 1.0) : 
+                    solution += "X" + str(j)
+
+                else :
+                    solution += "(" + str(truncate(value, 2)) + ")" + "*X" + str(j)
+
+                if j + 1 != m :
+                    solution += " + "
+
+
+        if (not solution == "") :
+            solution += " = " + str(matrix_b[i]).lstrip('[').rstrip(']')
         print(f"{bcolors.OKGREEN}", solution)
 
         solution = ""        
